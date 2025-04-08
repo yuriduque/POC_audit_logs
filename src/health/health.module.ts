@@ -4,7 +4,7 @@ import { AuditModule } from 'src/logger/audit.module';
 import { LoggerModule } from 'nestjs-pino';
 
 @Module({
-  imports: [AuditModule, LoggerModule],
+  imports: [AuditModule],
   controllers: [HealthController],
 })
 export class HealthModule {}

@@ -1,28 +1,16 @@
-import { Module, Scope } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AuditLogger } from './audit-logger';
-import { LoggerModule } from 'nestjs-pino';
+import { LogService } from './log.service';
+import { AuditMiddleware } from './audit.middlware';
+import { LogFileService } from './log-file.service';
 
 @Module({
-  imports: [
-    LoggerModule.forRoot({
-      pinoHttp: {
-        transport: {
-          targets: [
-            {
-              target:
-                '/Users/yurid/Documents/flow/POC_audit_logs/src/logger/audit-logger.transport.ts',
-              options: {
-                auditDestination:
-                  '/Users/yurid/Documents/flow/POC_audit_logs/logs/audit.log',
-              },
-            },
-          ],
-        },
-        level: 'warn',
-      },
-    }),
-  ],
-  providers: [AuditLogger],
+  imports: [],
+  providers: [AuditLogger, LogService, LogFileService],
   exports: [AuditLogger],
 })
-export class AuditModule {}
+export class AuditModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuditMiddleware).forRoutes('*');
+  }
+}

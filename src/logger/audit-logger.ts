@@ -1,15 +1,21 @@
-import { Injectable } from '@nestjs/common';
-import { PinoLogger } from 'nestjs-pino';
+import { Injectable, Scope } from '@nestjs/common';
+import { LogService } from './log.service';
 
-@Injectable()
-export class AuditLogger extends PinoLogger {
-  constructor() {
-    super({
-      renameContext: 'AuditLoggerContext',
-    });
+@Injectable({ scope: Scope.TRANSIENT })
+export class AuditLogger {
+  private context: string;
+
+  constructor(private readonly logService: LogService) {}
+
+  setContext(context: string) {
+    this.context = context;
   }
 
   audit(message: string) {
-    this.info({ audit: true }, message);
+    this.logService.create({
+      level: 'audit',
+      context: this.context,
+      message,
+    });
   }
 }
