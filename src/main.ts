@@ -6,7 +6,7 @@ async function bootstrap() {
     bufferLogs: true,
   });
 
-  app.enableShutdownHooks();
+  app.enableShutdownHooks(); // necessário para o onModuleDestroy funcionar
 
   await app.listen(3000);
 }

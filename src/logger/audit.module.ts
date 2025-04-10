@@ -1,8 +1,8 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
-import { AuditLogger } from './audit-logger';
-import { LogService } from './log.service';
-import { AuditMiddleware } from './audit.middlware';
-import { LogFileService } from './log-file.service';
+import { AuditLogger } from './loggers/audit.logger';
+import { AuditMiddleware } from './middlewares/audit.middleware';
+import { LogService } from './services/log.service';
+import { LogFileService } from './services/log-file.service';
 
 @Module({
   imports: [],

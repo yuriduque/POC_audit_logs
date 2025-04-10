@@ -1,19 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
-import { PinoLogger } from 'nestjs-pino';
-import { AuditLogger } from 'src/logger/audit-logger';
+import { Controller, Get, Query } from '@nestjs/common';
+import { HealthService } from './health.service';
 
 @Controller('health')
 export class HealthController {
-  constructor(private readonly auditLogger: AuditLogger) {
-    this.auditLogger.setContext(HealthController.name);
-  }
+  // constructor(private readonly healthService: HealthService) {}
 
   @Get()
-  getHealth() {
-    this.auditLogger.audit('AUDIT 1');
-    this.auditLogger.audit('AUDIT 2');
-    this.auditLogger.audit('AUDIT 3');
-    this.auditLogger.audit('AUDIT 4');
-    return { status: 'ok' };
+  getHealth(@Query('test') test: string) {
+    // this.healthService.getHealth(test);
+
+    return { status: 'ok', test };
   }
 }

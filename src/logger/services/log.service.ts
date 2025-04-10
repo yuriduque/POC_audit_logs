@@ -4,34 +4,45 @@ import { LogFileService } from './log-file.service';
 @Injectable({ scope: Scope.REQUEST })
 export class LogService {
   private user: any;
+  private request: any;
 
   constructor(private readonly logFileService: LogFileService) {}
 
   setUser(user: any) {
     this.user = user;
-    console.log('USER - SET', user);
   }
 
-  removeUser() {
-    this.user = undefined;
-    console.log('USER - REMOVED');
+  setRequest(request: any) {
+    this.request = {
+      method: request.method,
+      url: request.url,
+      headers: request.headers,
+      params: request.params,
+      query: request.query,
+      body: request.body,
+      ip: request.ip,
+      hostname: request.hostname,
+    };
   }
 
   create({
     level,
     context,
     message,
+    data = {},
   }: {
     level: string;
     message: string;
     context: string;
+    data?: any;
   }) {
-    console.log('CREATE -', message);
     const log = {
+      data,
+      message,
       user: this.user,
+      request: this.request,
       level,
       context,
-      message,
       timestamp: new Date().toISOString(),
     };
 
