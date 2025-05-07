@@ -56,3 +56,11 @@ Para enviar um eventos precisamos fazer uma request para o projeto Client na seg
 ```bash
 curl -X POST http://localhost:3000/events -H "Content-Type: application/json" -d '{"eventType": "test","eventDescription": "This is an example event"}'
 ```
+
+
+
+
+
+# Referencias
+
+https://github.com/dapr/quickstarts/tree/master
