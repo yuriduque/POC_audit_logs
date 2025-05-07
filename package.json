@@ -20,7 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "dapr:init": "dapr init --container-runtime podman", 
     "dapr:start": "dapr run --app-id poc_dapr --app-port 3000 --dapr-http-port 3500 --resources-path ./components -- nest start --watch",
-    "dapr:start:server": "dapr run --app-id poc_dapr --app-port 3001 --dapr-grpc-port 3500 --resources-path ./components"
+    "pubsub:client": "dapr run --app-id poc_dapr --app-protocol http --dapr-http-port 3500 --resources-path ./components -- nest start --watch"
   },
   "dependencies": {
     "@dapr/dapr": "^3.5.2",
