@@ -18,8 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "dapr:init": "dapr init --container-runtime podman",
-    "dapr:start": "dapr run --app-id myapp --app-port 3000 --dapr-http-port 3500 -- nest start --watch"
+    "dapr:init": "dapr init --container-runtime podman", 
+    "dapr:start": "dapr run --app-id poc_dapr --app-port 3000 --dapr-http-port 3500 --resources-path ./components -- nest start --watch",
+    "dapr:start:server": "dapr run --app-id poc_dapr --app-port 3001 --dapr-grpc-port 3500 --resources-path ./components"
   },
   "dependencies": {
     "@dapr/dapr": "^3.5.2",

@@ -1,9 +1,9 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { DaprService } from './dapr.service';
+import { DaprClientService } from './dapr-client.service';
 
 @Controller('events')
 export class DaprController {
-  constructor(private readonly daprService: DaprService) {}
+  constructor(private readonly daprService: DaprClientService) {}
 
   @Post()
   async createEvent(@Body() event: any) {

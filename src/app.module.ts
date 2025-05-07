@@ -2,11 +2,12 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DaprController } from './dapr.controller';
-import { DaprService } from './dapr.service';
+import { DaprClientService } from './dapr-client.service';
+import { DaprServerService } from './dapr-server.service';
 
 @Module({
   imports: [],
   controllers: [AppController, DaprController],
-  providers: [AppService, DaprService],
+  providers: [AppService, DaprClientService, DaprServerService],
 })
 export class AppModule {}
