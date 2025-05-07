@@ -1,5 +1,5 @@
 {
-  "name": "nome-do-projeto",
+  "name": "poc_dapr",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -8,19 +8,13 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "init": "dapr init",
+    "init:podman": "dapr init --container-runtime podman",
     "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
+    "start:dev": "dapr run --app-id poc_dapr --app-protocol http --dapr-http-port 3500 --resources-path ./components -- nest start --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "dapr:init": "dapr init --container-runtime podman", 
-    "dapr:start": "dapr run --app-id poc_dapr --app-port 3000 --dapr-http-port 3500 --resources-path ./components -- nest start --watch",
-    "pubsub:client": "dapr run --app-id poc_dapr --app-protocol http --dapr-http-port 3500 --resources-path ./components -- nest start --watch"
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
+    
   },
   "dependencies": {
     "@dapr/dapr": "^3.5.2",
@@ -56,22 +50,5 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
   }
 }
