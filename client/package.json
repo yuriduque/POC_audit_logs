@@ -8,11 +8,10 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "init": "dapr init",
-    "init:podman": "dapr init --container-runtime podman",
-    "start": "nest start",
-    "start:dev": "dapr run --app-id poc_dapr --app-protocol http --dapr-http-port 3500 --resources-path ./components -- nest start --watch",
-    "start:prod": "node dist/main",
+    "start": "nest start --watch",
+    "dapr": "dapr init",
+    "dapr:podman": "dapr init --container-runtime podman",
+    "dapr:start": "dapr run --app-id poc_dapr --app-protocol http --dapr-http-port 3500 --resources-path ./components",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
     
   },
