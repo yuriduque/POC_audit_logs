@@ -36,7 +36,8 @@ Para rodar o projeto de client basta executar os seguintes comandos
 ```bash
 cd client
 yarn install
-yarn start:dev
+yarn dapr:start
+yarn start
 ```
 
 ## 4 - Rodando server
