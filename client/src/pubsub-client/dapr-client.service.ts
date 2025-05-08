@@ -6,11 +6,6 @@ import { daprConfig } from './constants/dapr.constants';
 export class DaprClientService implements OnModuleInit {
   private daprClient: DaprClient;
 
-  constructor(
-    private readonly pubsub: string,
-    private readonly topic: string,
-  ) {}
-
   onModuleInit() {
     try {
       console.log('Initializing Dapr Client with configuration:', daprConfig);
@@ -33,7 +28,11 @@ export class DaprClientService implements OnModuleInit {
 
   async publishEvent(event: any) {
     try {
-      await this.daprClient.pubsub.publish(this.pubsub, this.topic, event);
+      await this.daprClient.pubsub.publish(
+        daprConfig.pubsub,
+        daprConfig.topic,
+        event,
+      );
 
       console.log(
         `Event published successfully to ${daprConfig.pubsub}/${daprConfig.topic}:`,

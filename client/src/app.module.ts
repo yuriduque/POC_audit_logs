@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { DaprModule } from './dapr/dapr.module';
+import { PubsubClientModule } from './pubsub-client/pubsub-client.module';
 
 @Module({
-  imports: [DaprModule],
+  imports: [PubsubClientModule],
 })
 export class AppModule {}

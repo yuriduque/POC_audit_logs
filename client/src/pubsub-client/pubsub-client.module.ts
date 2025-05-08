@@ -7,4 +7,4 @@ import { DaprController } from './dapr.controller';
   controllers: [DaprController],
   providers: [DaprClientService],
 })
-export class DaprModule {}
+export class PubsubClientModule {}
