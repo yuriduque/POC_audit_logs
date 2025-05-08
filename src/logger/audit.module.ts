@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AuditLogger } from './loggers/audit.logger';
 import { AuditMiddleware } from './middlewares/audit.middleware';
 import { LogService } from './services/log.service';
@@ -11,6 +11,12 @@ import { LogFileService } from './services/log-file.service';
 })
 export class AuditModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuditMiddleware).forRoutes('*');
+    consumer
+      .apply(AuditMiddleware)
+      .exclude(
+        { path: 'health', method: RequestMethod.ALL },
+        { path: 'healthz', method: RequestMethod.ALL },
+      )
+      .forRoutes('*');
   }
 }
