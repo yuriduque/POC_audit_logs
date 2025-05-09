@@ -1,5 +1,5 @@
 {
-  "name": "pubsub_client",
+  "name": "pubsub_server",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -10,7 +10,6 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start --watch",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
-    
   },
   "dependencies": {
     "@dapr/dapr": "^3.5.2",

@@ -36,21 +36,29 @@ Para rodar o projeto de client basta executar os seguintes comandos
 ```bash
 cd client
 yarn install
-yarn dapr:start
 yarn start
 ```
 
 ## 4 - Rodando server
 
-Para rodar o projeto de client basta executar os seguintes comandos 
+Para rodar o projeto de server basta executar os seguintes comandos 
 
 ```bash
 cd server
-yarn install
+yarn start:dapr
+```
+
+
+## 5 - Rodando consumer
+
+Para rodar o projeto de consumer basta executar os seguintes comandos 
+
+```bash
+cd consumer
 yarn start
 ```
 
-## 5 - Enviando eventos
+## 6 - Enviando eventos
 
 Para enviar um eventos precisamos fazer uma request para o projeto Client na seguinte url
 
