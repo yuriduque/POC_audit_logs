@@ -1,10 +1,18 @@
 /* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-floating-promises */
+
 import { DaprServer } from '@dapr/dapr';
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 
 @Injectable()
-export class DaprServerService implements OnModuleInit {
+export class DaprServerService implements OnModuleInit, OnModuleDestroy {
+  private daprServer: DaprServer;
+
+  async onModuleDestroy() {
+    await this.daprServer.stop();
+
+    console.log(`Dapr server stopped`);
+  }
+
   async onModuleInit() {
     const daprHost = 'http://localhost';
     const daprPort = '3501';
@@ -13,7 +21,7 @@ export class DaprServerService implements OnModuleInit {
     const pubSubName = 'orderpubsub';
     const pubSubTopic = 'orders';
 
-    const server = new DaprServer({
+    this.daprServer = new DaprServer({
       serverHost,
       serverPort,
       clientOptions: {
@@ -23,10 +31,12 @@ export class DaprServerService implements OnModuleInit {
     });
 
     // Dapr subscription routes orders topic to this route
-    server.pubsub.subscribe(pubSubName, pubSubTopic, async data =>
+    this.daprServer.pubsub.subscribe(pubSubName, pubSubTopic, async data =>
       console.log('Subscriber received: ' + JSON.stringify(data)),
     );
 
-    await server.start();
+    await this.daprServer.start();
+
+    console.log(`Dapr server started`);
   }
 }
