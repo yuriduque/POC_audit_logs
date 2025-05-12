@@ -22,9 +22,9 @@ Temos no projeto dois comandos para executar o Darp já configurados, um com doc
 ```bash
 cd client
 
-yarn init
+dapr init
 or
-yarn init:podman
+dapr init:podman
 ```
 
 ## 3 - Rodando client
