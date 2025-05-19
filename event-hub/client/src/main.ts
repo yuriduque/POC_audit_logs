@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const service = app.get(EventHubService);
-  service.subscribeToEvents();
+  service.sendEvent({ test: 'test' });
 
   app.enableShutdownHooks();
 

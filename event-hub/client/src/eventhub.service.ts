@@ -14,8 +14,9 @@ export class EventHubService implements OnModuleDestroy {
       this.eventHubName,
     );
   }
-  onModuleDestroy() {
-    throw new Error('Method not implemented.');
+
+  async onModuleDestroy() {
+    await this.producerClient.close();
   }
 
   async sendEvent(body: object) {

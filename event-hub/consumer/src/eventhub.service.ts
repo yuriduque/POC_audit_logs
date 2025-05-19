@@ -5,8 +5,8 @@ import { Injectable, OnModuleDestroy } from '@nestjs/common';
 @Injectable()
 export class EventHubService implements OnModuleDestroy {
   private connectionString: string = 'EVENT HUBS NAMESPACE CONNECTION STRING';
-  private readonly eventHubName: string = 'EVENTHUB';
-  private readonly consumerGroup: string = 'TENANT_AUDIT';
+  private readonly eventHubName: string = 'audit';
+  private readonly consumerGroup: string = 'audit_log';
 
   private readonly consumerClient: EventHubConsumerClient;
 
@@ -18,7 +18,8 @@ export class EventHubService implements OnModuleDestroy {
     );
   }
 
-  onModuleDestroy() {
+  async onModuleDestroy() {
+    await this.consumerClient.close();
     console.log('EventHubService is being destroyed');
   }
 
@@ -52,10 +53,5 @@ export class EventHubService implements OnModuleDestroy {
         console.log(`Closing subscription`);
       },
     });
-
-    // Unsubscribe after a certain condition or time
-    setTimeout(() => {
-      subscription.close();
-    }, 60000); // Unsubscribe after 60 seconds
   }
 }

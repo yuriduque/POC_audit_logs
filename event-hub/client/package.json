@@ -1,5 +1,5 @@
 {
-  "name": "pubsub_server",
+  "name": "event-hub-client",
   "version": "0.0.1",
   "description": "",
   "author": "",
