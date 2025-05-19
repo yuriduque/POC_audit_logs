@@ -3,7 +3,8 @@ import { Injectable, OnModuleDestroy } from '@nestjs/common';
 
 @Injectable()
 export class EventHubService implements OnModuleDestroy {
-  private connectionString: string = 'EVENT HUBS NAMESPACE CONNECTION STRING';
+  private connectionString: string =
+    'Endpoint=sb://localhost:5672/;SharedAccessKey=Ewa1234567890;SharedAccessKeyName=RootManageSharedAccessKey;';
   private readonly eventHubName: string = 'audit';
 
   private producerClient: EventHubProducerClient;
@@ -20,9 +21,14 @@ export class EventHubService implements OnModuleDestroy {
   }
 
   async sendEvent(body: object) {
-    const batch = await this.producerClient.createBatch();
-    batch.tryAdd({ body });
-    await this.producerClient.sendBatch(batch);
-    console.log('Evento enviado:', body);
+    try {
+      const batch = await this.producerClient.createBatch();
+      batch.tryAdd({ body });
+      await this.producerClient.sendBatch(batch);
+      console.log('Evento enviado:', body);
+    } catch (error) {
+      console.error('Error enviando evento:', error);
+      throw new Error('Error enviando evento a Event Hub');
+    }
   }
 }
