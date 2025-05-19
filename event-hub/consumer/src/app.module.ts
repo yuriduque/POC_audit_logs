@@ -2,6 +2,6 @@ import { Module } from '@nestjs/common';
 import { EventHubService } from './eventhub.service';
 
 @Module({
-  imports: [EventHubService],
+  providers: [EventHubService],
 })
 export class AppModule {}

@@ -4,7 +4,7 @@ import { Injectable, OnModuleDestroy } from '@nestjs/common';
 @Injectable()
 export class EventHubService implements OnModuleDestroy {
   private connectionString: string =
-    'Endpoint=sb://localhost:5672/;SharedAccessKey=Ewa1234567890;SharedAccessKeyName=RootManageSharedAccessKey;';
+    'Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;';
   private readonly eventHubName: string = 'audit';
 
   private producerClient: EventHubProducerClient;

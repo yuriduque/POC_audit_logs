@@ -4,7 +4,8 @@ import { Injectable, OnModuleDestroy } from '@nestjs/common';
 
 @Injectable()
 export class EventHubService implements OnModuleDestroy {
-  private connectionString: string = 'EVENT HUBS NAMESPACE CONNECTION STRING';
+  private connectionString: string =
+    'Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;';
   private readonly eventHubName: string = 'audit';
   private readonly consumerGroup: string = 'audit_log';
 
@@ -24,7 +25,7 @@ export class EventHubService implements OnModuleDestroy {
   }
 
   subscribeToEvents() {
-    const subscription = this.consumerClient.subscribe({
+    this.consumerClient.subscribe({
       processEvents: async (events, context) => {
         if (events.length === 0) {
           console.log(
@@ -35,7 +36,7 @@ export class EventHubService implements OnModuleDestroy {
 
         for (const event of events) {
           console.log(
-            `Received event: '${event.body}' from partition: '${context.partitionId}' and consumer group: '${context.consumerGroup}'`,
+            `Received event: '${JSON.stringify(event.body)}' from partition: '${context.partitionId}' and consumer group: '${context.consumerGroup}'`,
           );
         }
 
