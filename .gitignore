@@ -18,7 +18,7 @@ jspm_packages/
 dist/
 
 # Environment variables
-.env
+*.env
 
 # IDE specific files
 .vscode/

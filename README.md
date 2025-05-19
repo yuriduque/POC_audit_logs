@@ -81,4 +81,6 @@ https://github.com/dapr/quickstarts/tree/master
 # instalando azure event hub emulator
 
 https://github.com/Azure/azure-event-hubs-emulator-installer
+https://learn.microsoft.com/pt-br/azure/event-hubs/event-hubs-node-get-started-send?tabs=passwordless%2Croles-azure-portal
+https://learn.microsoft.com/en-us/javascript/api/overview/azure/eventhubs-checkpointstore-blob-readme?view=azure-node-latest
 
