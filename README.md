@@ -73,3 +73,12 @@ curl -X POST http://localhost:3000/events -H "Content-Type: application/json" -d
 # Referencias
 
 https://github.com/dapr/quickstarts/tree/master
+
+
+
+
+
+# instalando azure event hub emulator
+
+https://github.com/Azure/azure-event-hubs-emulator-installer
+
