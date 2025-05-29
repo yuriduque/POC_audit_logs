@@ -4,8 +4,8 @@ const daprHost = "http://localhost";
 const daprPort = "3501";
 const serverHost = "http://localhost"
 const serverPort = 5001;
-const pubSubName = "orderpubsub";
-const pubSubTopic = "orders";
+const pubSubName = "activity-log-dapr";
+const pubSubTopic = "activity-log";
 
 async function main() {
   const server = new DaprServer({

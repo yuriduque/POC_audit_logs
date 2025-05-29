@@ -19,7 +19,6 @@ export class EventHubService implements OnModuleDestroy {
   ) {}
 
   async createConsumerClient() {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const checkPointStore = await this.checkpointStoreService.create();
 
     this.consumerClient = new EventHubConsumerClient(
@@ -44,37 +43,34 @@ export class EventHubService implements OnModuleDestroy {
       await this.createConsumerClient();
     }
 
-    this.subscription = this.consumerClient.subscribe(
-      {
-        processEvents: async (events, context) => {
-          if (events.length === 0) {
-            console.log(
-              `No events received within wait time. Waiting for next interval`,
-            );
-            return;
-          }
-
-          for (const event of events) {
-            console.log(
-              `Received event: '${JSON.stringify(event.body)}' from partition: '${context.partitionId}' and consumer group: '${context.consumerGroup}'`,
-            );
-          }
-
-          await context.updateCheckpoint(events[events.length - 1]);
-        },
-        processError: async err => {
-          console.error(`Error occurred: ${err.message}`);
-        },
-        processInitialize: async context => {
+    this.subscription = this.consumerClient.subscribe({
+      processEvents: async (events, context) => {
+        if (events.length === 0) {
           console.log(
-            `Initializing subscription for partition: ${context.partitionId} and consumer group: ${context.consumerGroup}`,
+            `No events received within wait time. Waiting for next interval`,
           );
-        },
-        processClose: async () => {
-          console.log(`Closing subscription`);
-        },
+          return;
+        }
+
+        for (const event of events) {
+          console.log(
+            `Received event: '${JSON.stringify(event.body)}' from partition: '${context.partitionId}' and consumer group: '${context.consumerGroup}'`,
+          );
+        }
+
+        await context.updateCheckpoint(events[events.length - 1]);
       },
-      // { startPosition: { sequenceNumber: -1 } },
-    );
+      processError: async err => {
+        console.error(`Error occurred: ${err.message}`);
+      },
+      processInitialize: async context => {
+        console.log(
+          `Initializing subscription for partition: ${context.partitionId} and consumer group: ${context.consumerGroup}`,
+        );
+      },
+      processClose: async () => {
+        console.log(`Closing subscription`);
+      },
+    });
   }
 }

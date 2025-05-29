@@ -14,12 +14,12 @@ export class DaprServerService implements OnModuleInit, OnModuleDestroy {
   }
 
   async onModuleInit() {
-    const daprHost = 'http://localhost';
+    const daprHost = 'localhost';
     const daprPort = '3501';
-    const serverHost = 'http://localhost';
+    const serverHost = 'localhost';
     const serverPort = '5001';
-    const pubSubName = 'orderpubsub';
-    const pubSubTopic = 'orders';
+    const pubSubName = 'activity-log-dapr';
+    const pubSubTopic = 'activity-log';
 
     this.daprServer = new DaprServer({
       serverHost,
@@ -31,9 +31,9 @@ export class DaprServerService implements OnModuleInit, OnModuleDestroy {
     });
 
     // Dapr subscription routes orders topic to this route
-    this.daprServer.pubsub.subscribe(pubSubName, pubSubTopic, async data =>
-      console.log('Subscriber received: ' + JSON.stringify(data)),
-    );
+    this.daprServer.pubsub.subscribe(pubSubName, pubSubTopic, async data => {
+      console.log('Received data: ' + JSON.stringify(data));
+    });
 
     await this.daprServer.start();
 
