@@ -8,7 +8,7 @@
         "start": "node index.js",
         "dapr": "dapr init",
         "dapr:podman": "dapr init --container-runtime podman",
-        "start:dapr": "dapr run --app-port 5001 --app-id order-processing --app-protocol http --dapr-http-port 3501 --resources-path ../components",
+        "start:dapr": "dapr run --app-port 5001 --app-id order-processing --app-protocol http --dapr-http-port 3501 --max-body-size 16Mi --resources-path ../components",
         "start:dapr:consumer": "dapr run --app-port 5001 --app-id order-processing --app-protocol http --dapr-http-port 3501 --resources-path ../components -- yarn start"
     },
     "keywords": [],
