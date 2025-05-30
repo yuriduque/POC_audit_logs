@@ -28,6 +28,7 @@ export class DaprServerService implements OnModuleInit, OnModuleDestroy {
         daprHost,
         daprPort,
       },
+      maxBodySizeMb: 50,
     });
 
     // Dapr subscription routes orders topic to this route
