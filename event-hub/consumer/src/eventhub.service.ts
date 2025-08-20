@@ -1,22 +1,20 @@
 /* eslint-disable @typescript-eslint/require-await */
 import { EventHubConsumerClient, Subscription } from '@azure/event-hubs';
 import { Injectable, OnModuleDestroy } from '@nestjs/common';
-import { CheckpointStoreService } from './checkpoint.service';
+// import { CheckpointStoreService } from './checkpoint.service';
 
 @Injectable()
 export class EventHubService implements OnModuleDestroy {
   private connectionString: string =
-    process.env.CONSUMER_CONNECTION_STRING || '';
-  private readonly eventHubName: string =
-    process.env.CONSUMER_EVENT_HUB_NAME || '';
-  private readonly consumerGroup: string = process.env.CONSUMER_GROUP || '';
+    process.env.EVENT_HUB_CONNECTION_STRING || '';
+  private readonly eventHubName: string = process.env.EVENT_HUB_NAME || '';
+  private readonly consumerGroup: string =
+    process.env.EVENT_HUB_CONSUMER_GROUP || '';
 
   private consumerClient: EventHubConsumerClient;
   private subscription: Subscription | undefined;
 
-  constructor(
-    private readonly checkpointStoreService: CheckpointStoreService,
-  ) {}
+  constructor() {} // private readonly checkpointStoreService: CheckpointStoreService,
 
   async createConsumerClient() {
     // const checkPointStore = await this.checkpointStoreService.create();

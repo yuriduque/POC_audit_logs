@@ -3,7 +3,7 @@
         "NamespaceConfig": [
         {
             "Type": "EventHub",
-            "Name": "activity-log",
+            "Name": "emulatorns1",
             "Entities": [
             {
                 "Name": "activity-log",
