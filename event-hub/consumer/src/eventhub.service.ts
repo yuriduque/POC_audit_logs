@@ -19,14 +19,13 @@ export class EventHubService implements OnModuleDestroy {
   ) {}
 
   async createConsumerClient() {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const checkPointStore = await this.checkpointStoreService.create();
+    // const checkPointStore = await this.checkpointStoreService.create();
 
     this.consumerClient = new EventHubConsumerClient(
       this.consumerGroup,
       this.connectionString,
       this.eventHubName,
-      checkPointStore,
+      // checkPointStore,
     );
   }
 

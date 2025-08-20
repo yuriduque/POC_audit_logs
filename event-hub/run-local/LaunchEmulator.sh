@@ -25,13 +25,13 @@ do
     if [[ $arg == --compose-down=* ]]; then
         COMPOSE_DOWN="${arg#*=}"
         if [[ "$COMPOSE_DOWN" != "y" && "$COMPOSE_DOWN" != "Y" ]]; then
-            echo 'Invalid value for --compose-down. Use "Y" to only run docker compose down. Exiting script.'
+            echo 'Invalid value for --compose-down. Use "Y" to only run docker-compose down. Exiting script.'
             exit 1
         fi
     fi
 done
 
-# Skip EULA check if only running docker compose down
+# Skip EULA check if only running docker-compose down
 if [[ "$COMPOSE_DOWN" != 'y' && "$COMPOSE_DOWN" != 'Y' ]]; then
     # Check if ACCEPT_EULA is 'Y' or 'y'
     if [[ "$ACCEPT_EULA" != "y" && "$ACCEPT_EULA" != "Y" ]]; then
@@ -52,24 +52,24 @@ fi
 # Set Config Path as env variable
 export CONFIG_PATH=$CONFIG_PATH
 
-# Run docker compose down
-docker compose -f $composeFile down
+# Run docker-compose down
+docker-compose -f $composeFile down
 
 if [ $? -ne 0 ]; then
-    echo "An error occurred while running docker compose down. Exiting the script."
+    echo "An error occurred while running docker-compose down. Exiting the script."
     exit 1
 fi
 
 # If --compose-down is not 'Y', proceed with bringing containers up
 if [[ "$COMPOSE_DOWN" != 'y' && "$COMPOSE_DOWN" != 'Y' ]]; then
-    docker compose -f $composeFile up -d
+    docker-compose -f $composeFile up -d
 
     if [ $? -ne 0 ]; then
-        echo "An error occurred while running docker compose up. Exiting the script."
+        echo "An error occurred while running docker-compose up. Exiting the script."
         exit 1
     fi
 
     echo "Emulator Service and dependencies have been successfully launched!"
 else
-    echo "Docker compose down completed. Skipping docker compose up as --compose-down='Y' was passed."
+    echo "docker-compose down completed. Skipping docker-compose up as --compose-down='Y' was passed."
 fi

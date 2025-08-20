@@ -5,5 +5,6 @@ import { AppController } from './event.controller';
 @Module({
   controllers: [AppController],
   providers: [EventHubService],
+  exports: [EventHubService],
 })
 export class AppModule {}

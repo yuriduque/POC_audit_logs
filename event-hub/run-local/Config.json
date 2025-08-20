@@ -3,14 +3,14 @@
         "NamespaceConfig": [
         {
             "Type": "EventHub",
-            "Name": "flow",
+            "Name": "activity-log",
             "Entities": [
             {
-                "Name": "audit",
+                "Name": "activity-log",
                 "PartitionCount": 2,
                 "ConsumerGroups": [
                     {
-                        "Name": "audit_log"
+                        "Name": "$Default"
                     }
                 ]
             }

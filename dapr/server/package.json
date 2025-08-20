@@ -1,0 +1,15 @@
+{
+  "name": "order-processor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dapr": "dapr init",
+    "dapr:podman": "dapr init --container-runtime podman",
+    "start:dapr": "dapr run --app-port 5001 --app-id order-processing --app-protocol http --dapr-http-port 3500 --dapr-grpc-port 50001 --max-body-size 16Mi --resources-path ./components"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
