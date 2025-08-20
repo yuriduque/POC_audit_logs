@@ -15,11 +15,11 @@ export class DaprServerService implements OnModuleInit, OnModuleDestroy {
 
   async onModuleInit() {
     const daprHost = 'http://localhost';
-    const daprPort = '3501';
+    const daprPort = '3500';
     const serverHost = 'http://localhost';
     const serverPort = '5001';
-    const pubSubName = 'orderpubsub';
-    const pubSubTopic = 'orders';
+    const pubSubName = 'activity-log-dapr';
+    const pubSubTopic = 'activity-log';
 
     this.daprServer = new DaprServer({
       serverHost,
