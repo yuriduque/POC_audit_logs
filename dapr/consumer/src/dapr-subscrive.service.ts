@@ -43,9 +43,8 @@ export class DaprSubscribeService implements OnModuleInit, OnModuleDestroy {
       async data => {
         try {
           // console.log('Subscriber received: ' + JSON.stringify(data));
-          const event = data.event ?? data;
           // Forward the received data to Event Hub
-          await this.eventHubService.sendEvent(event);
+          await this.eventHubService.sendEvent(data);
           console.log('Event successfully forwarded to Event Hub');
         } catch (error) {
           console.error('Error forwarding event to Event Hub:', error);
