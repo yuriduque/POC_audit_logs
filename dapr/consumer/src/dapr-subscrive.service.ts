@@ -37,15 +37,15 @@ export class DaprSubscribeService implements OnModuleInit, OnModuleDestroy {
       maxBodySizeMb: 50,
     });
 
-    this.daprServer.pubsub.subscribe(
+    await this.daprServer.pubsub.subscribe(
       this.pubSubName,
       this.pubSubTopic,
       async data => {
         try {
-          console.log('Subscriber received: ' + JSON.stringify(data));
-
+          // console.log('Subscriber received: ' + JSON.stringify(data));
+          const event = data.event ?? data;
           // Forward the received data to Event Hub
-          await this.eventHubService.sendEvent(data);
+          await this.eventHubService.sendEvent(event);
           console.log('Event successfully forwarded to Event Hub');
         } catch (error) {
           console.error('Error forwarding event to Event Hub:', error);

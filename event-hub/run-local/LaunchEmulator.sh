@@ -53,7 +53,7 @@ fi
 export CONFIG_PATH=$CONFIG_PATH
 
 # Run docker-compose down
-docker-compose -f $composeFile down
+docker compose -f $composeFile down
 
 if [ $? -ne 0 ]; then
     echo "An error occurred while running docker-compose down. Exiting the script."
@@ -62,7 +62,7 @@ fi
 
 # If --compose-down is not 'Y', proceed with bringing containers up
 if [[ "$COMPOSE_DOWN" != 'y' && "$COMPOSE_DOWN" != 'Y' ]]; then
-    docker-compose -f $composeFile up -d
+    docker compose -f $composeFile up -d
 
     if [ $? -ne 0 ]; then
         echo "An error occurred while running docker-compose up. Exiting the script."
@@ -71,5 +71,5 @@ if [[ "$COMPOSE_DOWN" != 'y' && "$COMPOSE_DOWN" != 'Y' ]]; then
 
     echo "Emulator Service and dependencies have been successfully launched!"
 else
-    echo "docker-compose down completed. Skipping docker-compose up as --compose-down='Y' was passed."
+    echo "docker compose down completed. Skipping docker compose up as --compose-down='Y' was passed."
 fi
