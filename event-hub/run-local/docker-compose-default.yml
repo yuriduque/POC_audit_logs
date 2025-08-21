@@ -32,5 +32,17 @@ services:
       eh-emulator:
         aliases:
           - "azurite"
+  azurite-init:
+    image: mcr.microsoft.com/azure-cli:latest
+    depends_on:
+      - azurite
+    environment:
+      AZURE_STORAGE_CONNECTION_STRING: "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://azurite:10000/devstoreaccount1;"
+    command: >
+      sh -c "
+        az storage container create --name azurite --connection-string \"$$AZURE_STORAGE_CONNECTION_STRING\" || true
+      "
+    networks:
+      - eh-emulator
 networks:
   eh-emulator:

@@ -10,7 +10,7 @@
                 "PartitionCount": 2,
                 "ConsumerGroups": [
                     {
-                        "Name": "$Default"
+                        "Name": "yuri"
                     }
                 ]
             }
